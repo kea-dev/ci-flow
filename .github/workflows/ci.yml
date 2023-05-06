@@ -6,7 +6,7 @@ on:
       - main
       
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 permissions:
   checks: write
@@ -26,12 +26,14 @@ jobs:
 
       - name: Tell git who we are
         run: |
+          set -ex
           git config --global user.name "GitHub Actions"
           git config --global user.email "github-actions@github.com"
           git config --global advice.skippedCherryPicks false
           
       - name: Rebased against default branch
         run: |
+          set -ex
           ORIGIN=origin  
           TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
           git rebase ${ORIGIN}/${TARGET_BRANCH}
@@ -42,7 +44,8 @@ jobs:
         
       - name: Push changes to main branch
         run: |
+          set -ex
           ORIGIN=origin  
           TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
-          git push ${{ github.ref_name }}:${ORIGIN}/${TARGET_BRANCH}
+          git push ${{github.ref_name}}:${ORIGIN}/${TARGET_BRANCH}
           
