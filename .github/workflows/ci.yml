@@ -1,0 +1,42 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches-ignore:
+      - main
+      
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+permissions:
+  checks: write
+  actions: write
+  contents: read
+  issues: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
+      - name: Rebased against default branch
+        run: |
+          ORIGIN=origin  
+          TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )}
+          git rebase ${ORIGIN}/${TARGET_BRANCH}
+          
+      - name: Do the build
+        run: |
+          echo This is where you run the build
+        
+      - name: Push changes to main branch
+        run: |
+          ORIGIN=origin  
+          TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )}
+          git push ${{ github.ref_name }} ${ORIGIN}/${TARGET_BRANCH}
+          
