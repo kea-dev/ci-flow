@@ -28,6 +28,7 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "github-actions@github.com"
+          git config --global advice.skippedCherryPicks false
           
       - name: Rebased against default branch
         run: |
@@ -43,5 +44,5 @@ jobs:
         run: |
           ORIGIN=origin  
           TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
-          git push ${{ github.ref_name }} ${ORIGIN}/${TARGET_BRANCH}
+          git push ${{ github.ref_name }}:${ORIGIN}/${TARGET_BRANCH}
           
