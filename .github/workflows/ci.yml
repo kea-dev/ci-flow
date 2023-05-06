@@ -27,7 +27,7 @@ jobs:
       - name: Rebased against default branch
         run: |
           ORIGIN=origin  
-          TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )}
+          TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
           git rebase ${ORIGIN}/${TARGET_BRANCH}
           
       - name: Do the build
@@ -37,6 +37,6 @@ jobs:
       - name: Push changes to main branch
         run: |
           ORIGIN=origin  
-          TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )}
+          TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
           git push ${{ github.ref_name }} ${ORIGIN}/${TARGET_BRANCH}
           
