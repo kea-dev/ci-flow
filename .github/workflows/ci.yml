@@ -14,7 +14,7 @@ env:
 #  contents: read
 #  issues: write
 
-permissions: read-all|write-all
+permissions: write-all
 
 jobs:
   build:
