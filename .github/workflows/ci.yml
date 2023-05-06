@@ -8,11 +8,13 @@ on:
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-permissions:
-  checks: write
-  actions: write
-  contents: read
-  issues: write
+#permissions:
+#  checks: write
+#  actions: write
+#  contents: read
+#  issues: write
+
+permissions: read-all|write-all
 
 jobs:
   build:
