@@ -47,5 +47,5 @@ jobs:
           set -ex
           ORIGIN=origin  
           TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
-          git push ${{github.ref_name}}:${ORIGIN}/${TARGET_BRANCH}
+          git push ${ORIGIN} ${{github.ref_name}}:${TARGET_BRANCH}
           
