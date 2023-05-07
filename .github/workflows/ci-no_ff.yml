@@ -40,8 +40,7 @@ jobs:
       - name: Rebased against default branch
         run: |
           set -ex
-          TARGET_BRANCH=$GITHUB_WORKFLOW/repo.outputs.target_branch
-          git rebase ${ORIGIN}/${TARGET_BRANCH}
+          git rebase ${ORIGIN}/${{ steps.repo.outputs.target_branch }}
           
       - name: Do the build
         run: |
@@ -50,7 +49,7 @@ jobs:
       - name: Push changes to main branch
         run: |
           set -ex
-          ORIGIN=origin  
-          TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
-          git push ${ORIGIN} ${{github.ref_name}}:${TARGET_BRANCH}
-          
+          git checkout ${{ steps.repo.outputs.target_branch }}
+          git pull
+          git merge --ff-only ${{github.ref_name}}
+          git push ${ORIGIN} ${{ steps.repo.outputs.target_branch }}
