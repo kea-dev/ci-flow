@@ -10,10 +10,10 @@ The point of this repo is to demonstrate a lot of different things you can do in
 
 We will start out with simple approaches and then make them more and more advanced - you should get off when you thing you found the one that suits your temper.
 
-### Minimialilst starter
+### Minimalistic starter flow
 
-YAML: [ci-minimal._yml](.github/workflows/ci-minimal._yml)
-Documentation [ci-minimal.md](ci-minimal.md)
+**YAML**: [`ci-minimal._yml`](.github/workflows/ci-minimal._yml)<br/>
+**Documentation**: [`ci-minimal.md`](ci-minimal.md)
 
 Overall, this workflow checks out the code, sets up Git user information, rebases the current branch against the default integration branch, runs a build (or actually a placeholder for it), and pushes the changes to the remote default branch. 
 
