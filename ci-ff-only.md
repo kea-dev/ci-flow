@@ -1,4 +1,4 @@
-# `ci-mo-ff.yml`
+# `ci-ff-only.yml`
 
 ##### Overall, this workflow achieves exactly the same as the [`ci-minimal._yml`](ci-minimal.md) but it uses a few optimizations.  Let's go through what is differet.
 
