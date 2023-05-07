@@ -43,7 +43,7 @@ jobs:
       - name: Rebased against default branch
         run: |
           set -ex
-          gh pr merge --auto --rebase --base ${{ steps.repo.outputs.target_branch }}
+          gh pr merge --auto --rebase
                 
       - name: Do the build
         run: |
