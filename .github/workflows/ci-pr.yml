@@ -54,4 +54,4 @@ jobs:
       - name: Merge and delete branch, close PR
         run: |
           set -ex
-          gh pr merge --auto --rebase --delete-branch --title "Automated merge by ${{ github.event.job.name }}
+          gh pr merge --auto --rebase --delete-branch --title "Automated merge by ${{ github.job }}"
