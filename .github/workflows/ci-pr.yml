@@ -1,24 +1,30 @@
 name: Continuous Integration
 
+# On pull requests, rebase against default branch and push to it
+
 on:
-  push:
-    branches-ignore:
+  pull_request:
+    branches:
       - main
-      
+      - master
+
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  ORIGIN: origin
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
-  build:
+  ci-pr:
     runs-on: ubuntu-latest
     steps:
     
       - name: Checkout code
         uses: actions/checkout@v3
         with:
+          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
       - name: Tell git who we are
@@ -27,15 +33,17 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "github-actions@github.com"
           git config --global advice.skippedCherryPicks false
+
+      - name: Get default target branch name
+        id: repo
+        run: |
+          set -ex
+          echo ::set-output name=target_branch::$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
           
       - name: Rebased against default branch
         run: |
           set -ex
-          ORIGIN=origin  
-          TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
-          git rebase ${ORIGIN}/${TARGET_BRANCH}
-          git checkout ${TARGET_BRANCH}
-          git merge --ff-only ${{github.ref_name}}
+          gh pr merge --auto --rebase --base ${{ steps.repo.outputs.target_branch }}
                 
       - name: Do the build
         run: |
@@ -44,7 +52,6 @@ jobs:
       - name: Push changes to main branch
         run: |
           set -ex
-          ORIGIN=origin  
-          TARGET_BRANCH=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
-          git push ${ORIGIN} ${TARGET_BRANCH}
+          gh pr review --approve --body "Automated approval" --comment "Automated approval"
+          gh pr close --delete-branch --merge
           

@@ -4,7 +4,8 @@
 		"vscode": {
 			"extensions": [
 				"github.vscode-github-actions",
-				"eamodio.gitlens"
+				"eamodio.gitlens",
+				"GitHub.copilot-nightly"
 			]
 		}
 	}
