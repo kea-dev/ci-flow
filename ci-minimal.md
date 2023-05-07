@@ -7,13 +7,14 @@
 Specifically this is a  YAML file that defines a GitHub Actions workflow named "Continuous Integration". Here's what the workflow does:
 
 ### Event Triggers
-The workflow is triggered when a push event occurs on any branch other than the main branch. 
+The workflow is triggered when a push event occurs on any branch other than the `main` or `master` branch. 
 
 ```yaml
 on:
   push:
     branches-ignore:
       - main
+      - master
 ```
 
 ### Environment Variables
