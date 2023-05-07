@@ -39,12 +39,12 @@ jobs:
         id: repo
         run: |
           set -ex
-          echo ::set-output name=target_branch::$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
+          echo "target_branch=$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )" >> "$GITHUB_ENV"
           
       - name: Rebased against default branch
         run: |
           set -ex
-          git rebase ${ORIGIN}/${{ steps.repo.outputs.target_branch }}
+          git rebase ${ORIGIN}/${{ env.target_branch }}
           
                 
       - name: Do the build
