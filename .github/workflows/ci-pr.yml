@@ -52,6 +52,6 @@ jobs:
       - name: Push changes to main branch
         run: |
           set -ex
-          gh pr review --approve --body "Automated approval" --comment "Automated approval"
-          gh pr close --delete-branch --merge
+          gh pr review --approve --body "Automated approval"
+          gh pr close --delete-branch --comment "Automated close"
           
