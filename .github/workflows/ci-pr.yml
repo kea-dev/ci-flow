@@ -53,7 +53,7 @@ jobs:
       - name: Merge, approve and close PR
         run: |
           set -ex
-          gh pr merge --auto
-          gh pr review --approve --body "Automated approval"
-          gh pr close --delete-branch --comment "Automated close"
+          gh pr merge --auto --rebase --subject "Automated rebase"
+          gh pr review --approve --body "Approved by ${{ github.actor }}"
+          gh pr close --delete-branch --comment "Automated close by ${{ github.event.job.name }}"
           
