@@ -19,3 +19,11 @@ Overall, this workflow checks out the code, sets up Git user information, rebase
 
 It's a very basic continuous integration process that triggers on _any_ branch that isn't `main` or `master`.
 
+
+### Optimized, safer, but still quite simple
+
+**YAML**: [`ci-ff-only._yml`](.github/workflows/ci-ff-only._yml)<br/>
+**Documentation**: [`ci-ff-only.md`](ci-ff-only.md)
+
+Overall, this workflow achieves exactly the same as the previous `ci-minimal._yml` but it uses a few optimizations. And it's just a tad safer.
+
