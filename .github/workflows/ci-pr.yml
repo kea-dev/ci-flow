@@ -43,15 +43,17 @@ jobs:
       - name: Rebased against default branch
         run: |
           set -ex
-          gh pr merge --auto --rebase
+          git rebase ${ORIGIN}/${{ steps.repo.outputs.target_branch }}
+          
                 
       - name: Do the build
         run: |
           echo This is where you run the build
 
-      - name: Push changes to main branch
+      - name: Merge, approve and close PR
         run: |
           set -ex
+          gh pr merge --auto
           gh pr review --approve --body "Automated approval"
           gh pr close --delete-branch --comment "Automated close"
           
