@@ -35,9 +35,9 @@ Overall, this workflow achieves exactly the same as the previous `ci-minimal._ym
 This workflow doesn't trigger on branches, but uses pull requests instead. The PR's branch is still rebased first, tested and then delivered to GitHub. The result is the same, but the workprocess differes; Nothing is tested until the developer explicitly makes the issue brach as _ready_ by creating a pr on the issue branch.
 
 # Optimize more
-There - now you have a few basic principles to go with.
+There - now you have a few basic principles to go with. There is still a lot of optimizations you can do. You should _continiously optimize_ you flow, but consider, when you work on flows, to take it to a seperate repo. I tend to find that is often requires quite a few commits to cover all corner-cases. When you have you flow working in yout test repo, you copy it back to your production repo.
 
-My flow works like this
+### My flow works like this
 
 - Create an issue fore everything your wanna do - yuu can even do it from the command line - think of this as merely writing your commit message _before_  you begin
   ```shell
