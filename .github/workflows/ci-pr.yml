@@ -12,7 +12,9 @@ env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   ORIGIN: origin
 
-permissions: write-all
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   ci-pr:
